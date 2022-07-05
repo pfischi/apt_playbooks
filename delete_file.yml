@@ -1,7 +1,8 @@
 - name: Remove file (delete file)
   hosts: all
   tasks:
-    ansible.builtin.file:
-      path: /etc/foo.conf
-      state: touch
-      mode: u=rw,g=r,o=r
+    - name: Creating an empty file
+      ansible.builtin.file:
+        path: "/tmp/test"
+        state: touch
+        mode: u=rw,g=r,o=r
