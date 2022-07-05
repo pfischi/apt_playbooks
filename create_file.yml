@@ -3,6 +3,6 @@
   tasks:
     - name: Create File
       ansible.builtin.file:
-        path: {{ file_path }}
+        path: "{{ file_path }}"
         state: touch
         mode: u=rw,g=r,o=r
