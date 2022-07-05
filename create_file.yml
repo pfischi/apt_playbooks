@@ -1,8 +1,8 @@
-- name: Remove file (delete file)
+- name: Create File
   hosts: all
   tasks:
-    - name: Creating an empty file
+    - name: Create File
       ansible.builtin.file:
-        path: "/tmp/test"
+        path: {{ file_path }}
         state: touch
         mode: u=rw,g=r,o=r
