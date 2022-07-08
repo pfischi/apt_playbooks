@@ -8,8 +8,4 @@
         dest: "{{ file_path }}"
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
-
-    - name: set permissions
-      ansible.builtin.file:
-        path: "{{ file_path }}"
-        mode: "{{ permissions }}"
+        mode: "{{ permissions | default(omit) }}"
