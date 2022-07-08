@@ -9,7 +9,8 @@
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
-      when: {{ base64Content }} == True
+      when:
+        - {{ base64Content }} is undefined
 
     - name: create file with text content
       ansible.builtin.copy:
@@ -18,4 +19,7 @@
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
-      when: {{ base64Content }} == False
+      when:
+        - {{ base64Content }} is defined
+        - {{ base64Content }} | bool
+        - {{ base64Content }} == true
