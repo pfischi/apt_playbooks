@@ -10,7 +10,7 @@
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
-      when: when: base64Content|default(False) == False
+      when: base64Content|default(False) == False
 
     - name: create file with text content
       base64Content: "{{ base64Content | default(false) }}"
