@@ -1,16 +1,15 @@
 - name: Create File
   hosts: '{{ host }}'
   tasks:
-    
+
     - name: create file
       ansible.builtin.copy:
         content: "this is a test"
         dest: "{{ file_path }}"
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
-        mode: "{{ permissions | default(omit) }}"
 
     - name: set permissions
       ansible.builtin.file:
         path: "{{ file_path }}"
-        mode: "{{ permissions | default(omit) }}"
+        mode: {{ permissions }}
