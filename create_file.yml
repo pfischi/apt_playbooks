@@ -1,7 +1,7 @@
 - name: Create File
   hosts: '{{ host }}'
   vars:
-    base64Content: {{ base64Content }}
+    base64Content: "{{ base64Content }}"
   tasks:
 
     - name: create file with text content
