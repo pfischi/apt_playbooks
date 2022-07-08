@@ -5,7 +5,7 @@
     - name: create file with text content
       base64Content: "{{ base64Content | default(false) }}"
       ansible.builtin.copy:
-        content: {{ content | b64decode }}
+        content: "{{ content | b64decode }}"
         dest: "{{ file_path }}"
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
@@ -15,7 +15,7 @@
     - name: create file with text content
       base64Content: "{{ base64Content | default(false) }}"
       ansible.builtin.copy:
-        content: {{ content }}
+        content: "{{ content }}"
         dest: "{{ file_path }}"
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
