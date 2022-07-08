@@ -7,4 +7,4 @@
         dest: "{{ file_path }}"
         owner: "{{ owner | default('') }}"
         group: "{{ group | default('') }}"
-        mode: "{{ permissions | default('u=rw,g=r,o=r') }}"
+        mode: "{{ permissions }}"
