@@ -1,8 +1,10 @@
 - name: Create File
   hosts: '{{ host }}'
   tasks:
-    - name: Create File
-      ansible.builtin.file:
-        path: "{{ file_path }}"
-        state: touch
+    - name: Copy file with owner and permission, using symbolic representation
+      ansible.builtin.copy:
+        content: "this is a test"
+        dest: "{{ file_path }}"
+        owner: ""
+        group: ""
         mode: u=rw,g=r,o=r
