@@ -1,9 +1,6 @@
 - name: Create File
   hosts: '{{ host }}'
-  vars:
-    base64Content: "{{ base64Content }}"
   tasks:
-
     - name: create file with text content
       ansible.builtin.copy:
         content: "{{ content | b64decode }}"
@@ -11,6 +8,7 @@
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
+        base64Content: "{{ base64Content }}"
       when: base64Content|default(False) == True
 
     - name: create file with base64 content
@@ -20,4 +18,5 @@
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
+        base64Content: "{{ base64Content }}"
       when: base64Content|default(False) == False
