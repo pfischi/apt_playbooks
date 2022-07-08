@@ -2,10 +2,20 @@
   hosts: '{{ host }}'
   tasks:
 
-    - name: create file
+    - name: create file with text content
       ansible.builtin.copy:
-        content: "this is a test"
+        content: {{ content | b64decode }}
         dest: "{{ file_path }}"
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
+      when: {{ base64Content }} == True
+
+    - name: create file with text content
+      ansible.builtin.copy:
+        content: {{ content }}
+        dest: "{{ file_path }}"
+        owner: "{{ owner | default(omit) }}"
+        group: "{{ group | default(omit) }}"
+        mode: "{{ permissions | default(omit) }}"
+      when: {{ base64Content }} == False
