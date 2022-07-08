@@ -3,23 +3,21 @@
   tasks:
 
     - name: create file with text content
+      base64Content: "{{ base64Content | default(false) }}"
       ansible.builtin.copy:
         content: {{ content | b64decode }}
         dest: "{{ file_path }}"
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
-      when:
-        - "{{ base64Content }}" is undefined
+      when: when: base64Content|default(False) == False
 
     - name: create file with text content
+      base64Content: "{{ base64Content | default(false) }}"
       ansible.builtin.copy:
         content: {{ content }}
         dest: "{{ file_path }}"
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
-      when:
-        - "{{ base64Content }}" is defined
-        - "{{ base64Content }}" | bool
-        - "{{ base64Content }}" == true
+      when: base64Content|default(False) == True
