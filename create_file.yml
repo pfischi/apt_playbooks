@@ -5,6 +5,6 @@
       ansible.builtin.copy:
         content: "this is a test"
         dest: "{{ file_path }}"
-        owner: ""
-        group: ""
-        mode: u=rw,g=r,o=r
+        owner: "{{ owner | default('') }}"
+        group: "{{ group | default('') }}"
+        mode: "{{ permissions | default('u=rw,g=r,o=r') }}"
