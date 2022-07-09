@@ -4,7 +4,7 @@
   tasks:
     - name: set facts
         set_fact:
-          is_base64_content="{{ base64Content | default(omit) }}"
+          is_base64_content: "{{ base64Content | default(omit) }}"
 
     - name: create file with text content
       copy:
