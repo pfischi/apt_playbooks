@@ -1,11 +1,8 @@
 - name: Create File
   hosts: '{{ host }}'
-
+  vars:
+    is_base64_content: "{{ base64Content | default(omit) }}"
   tasks:
-    - name: set facts
-      set_fact:
-        is_base64_content: "{{ base64Content | default(omit) }}"
-
     - name: create file with text content
       copy:
         content: "{{ content | b64decode }}"
@@ -26,5 +23,4 @@
 
     - name: Display all variables/facts known for a host
       debug:
-        var: ansible_facts
-        verbosity: 4
+        var: is_base64_content
