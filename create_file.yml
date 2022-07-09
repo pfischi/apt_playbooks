@@ -13,7 +13,7 @@
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
-      when: ansible_facts['is_base64_content'] != true
+      #when: ansible_facts['is_base64_content'] != true
 
     - name: create file with base64 content
       copy:
@@ -22,9 +22,9 @@
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
-      when: ansible_facts['is_base64_content'] == true
+      #when: ansible_facts['is_base64_content'] == true
 
     - name: Display all variables/facts known for a host
       debug:
-        var: is_base64_content
+        var: ansible_facts
         verbosity: 4
