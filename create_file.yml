@@ -1,10 +1,13 @@
 - name: Create File
   hosts: '{{ host }}'
-  set_fact:
-    is_base64_content: "{{ base64Content | default(omit) }}"
+
   tasks:
+    - name: set facts
+        set_fact:
+          is_base64_content="{{ base64Content | default(omit) }}"
+
     - name: create file with text content
-      ansible.builtin.copy:
+      copy:
         content: "{{ content | b64decode }}"
         dest: "{{ file_path }}"
         owner: "{{ owner | default(omit) }}"
@@ -13,10 +16,15 @@
       when: not is_base64_content
 
     - name: create file with base64 content
-      ansible.builtin.copy:
+      copy:
         content: "{{ content }}"
         dest: "{{ file_path }}"
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
       when: is_base64_content
+
+    - name: Display all variables/facts known for a host
+      debug:
+        var: is_base64_content
+        verbosity: 4
