@@ -3,24 +3,20 @@
   vars:
     is_base64_content: "{{ base64Content | default(omit) }}"
   tasks:
-    - name: create file with text content
-      copy:
-        content: "{{ content | b64decode }}"
-        dest: "{{ file_path }}"
-        owner: "{{ owner | default(omit) }}"
-        group: "{{ group | default(omit) }}"
-        mode: "{{ permissions | default(omit) }}"
-      when: is_base64_content|bool != true
-
-    - name: create file with base64 content
+    - name: create a file with text content
       copy:
         content: "{{ content }}"
         dest: "{{ file_path }}"
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
-      when: is_base64_content|bool == true
+      when: is_base64_content|bool != true
 
-    - name: Display all variables/facts known for a host
-      debug:
-        var: is_base64_content
+    - name: create a file with base64 content
+      copy:
+        content: "{{ content | b64decode }}"
+        dest: "{{ file_path }}"
+        owner: "{{ owner | default(omit) }}"
+        group: "{{ group | default(omit) }}"
+        mode: "{{ permissions | default(omit) }}"
+      when: is_base64_content|bool == true
