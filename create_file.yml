@@ -1,8 +1,8 @@
 - name: Create File
   hosts: '{{ host }}'
+  vars: base64Content: "{{ base64Content | default(omit) }}"
   tasks:
     - name: create file with text content
-      base64Content: "{{ base64Content | default(omit) }}"
       ansible.builtin.copy:
         content: "{{ content | b64decode }}"
         dest: "{{ file_path }}"
@@ -12,7 +12,6 @@
       when: not base64Content
 
     - name: create file with base64 content
-      base64Content: "{{ base64Content }}"
       ansible.builtin.copy:
         content: "{{ content }}"
         dest: "{{ file_path }}"
