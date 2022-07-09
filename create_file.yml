@@ -20,3 +20,7 @@
         group: "{{ group | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
       when: is_base64_content|bool == true
+
+    - name: debugging purpose
+      ansible.builtin.pause:
+        minutes: 5
