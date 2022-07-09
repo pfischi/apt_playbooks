@@ -1,6 +1,6 @@
 - name: Create File
   hosts: '{{ host }}'
-  vars: base64Content: "{{ base64Content | default(omit) }}"
+  vars: "{{ base64Content | default(omit) }}"
   tasks:
     - name: create file with text content
       ansible.builtin.copy:
