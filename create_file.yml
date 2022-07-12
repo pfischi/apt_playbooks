@@ -2,6 +2,8 @@
   hosts: '{{ host }}'
   vars:
     is_base64_content: "{{ base64Content | default(omit) }}"
+    ansible_ssh_private_key_file: "{{ ssk_key }}"
+    ansible_user: "{{ ssh_user }}"
   tasks:
     - name: create a file with text content
       copy:
