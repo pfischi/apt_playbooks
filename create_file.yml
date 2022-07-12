@@ -5,7 +5,7 @@
     ansible_ssh_private_key_file: "{{ ssk_key || default(omit) }}"
     ansible_user: "{{ ssh_user | default(omit) }}"
     ansible_password: "{{ ssh_password | default(omit) }}"
-    ansible_port: "{{ ssh_port | 22 }}"
+    ansible_port: "{{ ssh_port | default(omit) }}"
   tasks:
     - name: create a file with text content
       copy:
