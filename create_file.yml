@@ -3,7 +3,9 @@
   vars:
     is_base64_content: "{{ base64Content | default(omit) }}"
     ansible_ssh_private_key_file: "{{ ssk_key || default(omit) }}"
-    ansible_user: "{{ ssh_user }}"
+    ansible_user: "{{ ssh_user | default(omit) }}"
+    ansible_password: "{{ ssh_password | default(omit) }}"
+    ansible_port: "{{ ssh_password | 22 }}"
   tasks:
     - name: create a file with text content
       copy:
