@@ -14,4 +14,6 @@
         group: "{{ group | default(omit) }}"
         mode: "{{ mode | default(omit) }}"
         access_time: "{{ access_time | default(omit) }}"
+        access_time_format: "{{ access_time_format | default(omit) }}"
         modification_time: "{{ modification_time | default(omit) }}"
+        modification_time_format: "{{ modification_time_format | default(omit) }}"
