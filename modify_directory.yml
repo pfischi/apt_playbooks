@@ -10,6 +10,7 @@
       stat:
         path: "{{ path }}"
       register: result
+      failed_when: not result.stat.exists
 
     - name: modify file attributes
       file:
