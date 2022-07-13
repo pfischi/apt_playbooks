@@ -9,7 +9,7 @@
     - name: modify file attributes
       file:
         path: "{{ path }}"
-        state: "{{ state | default(omit) }}"
+        state: file
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
         mode: "{{ mode | default(omit) }}"
