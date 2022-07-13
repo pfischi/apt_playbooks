@@ -9,7 +9,7 @@
   tasks:
     - name: create a file with text content
       copy:
-        content: "{{ content }}"
+        content: "{{ content | default(omit) }}"
         dest: "{{ file_path }}"
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
