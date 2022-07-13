@@ -6,22 +6,29 @@
     ansible_password: "{{ ssh_password | default(omit) }}"
     ansible_port: "{{ ssh_port | default(22,boolean=True) }}"
   tasks:
-    - name: "Check if dir path exists"
-      stat:
-        path: "{{ path }}"
-      register: result
-      failed_when: not result.stat.exists
+    - name: just for a custm error message
+      block:
+        - name: "Check if dir path exists"
+          stat:
+            path: "{{ path }}"
+          register: result
+          failed_when: not result.stat.exists
 
-    - name: modify file attributes
-      file:
-        path: "{{ path }}"
-        state: directory
-        owner: "{{ owner | default(omit) }}"
-        group: "{{ group | default(omit) }}"
-        mode: "{{ mode | default(omit) }}"
-        access_time: "{{ access_time | default(omit) }}"
-        access_time_format: "{{ access_time_format | default(omit) }}"
-        modification_time: "{{ modification_time | default(omit) }}"
-        modification_time_format: "{{ modification_time_format | default(omit) }}"
-        recurse: "{{ recurse | default(omit) }}"
-      when: result.stat.exists
+        - name: modify file attributes
+          file:
+            path: "{{ path }}"
+            state: directory
+            owner: "{{ owner | default(omit) }}"
+            group: "{{ group | default(omit) }}"
+            mode: "{{ mode | default(omit) }}"
+            access_time: "{{ access_time | default(omit) }}"
+            access_time_format: "{{ access_time_format | default(omit) }}"
+            modification_time: "{{ modification_time | default(omit) }}"
+            modification_time_format: "{{ modification_time_format | default(omit) }}"
+            recurse: "{{ recurse | default(omit) }}"
+          when: result.stat.exists
+
+      rescue:
+        - name: custom error message
+          fail:
+            msg: "Directory {{ path }} does not exists."
