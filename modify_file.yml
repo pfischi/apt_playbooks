@@ -6,6 +6,15 @@
     ansible_password: "{{ ssh_password | default(omit) }}"
     ansible_port: "{{ ssh_port | default(22,boolean=True) }}"
   tasks:
+    - name: check if file exists
+      stat:
+        path: "{{ path }}"
+      register: result
+
+    - fail:
+        msg: "{{ path }} not exists."
+      when: not result.stat.exists
+
     - name: modify file attributes
       file:
         path: "{{ path }}"
