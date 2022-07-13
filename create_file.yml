@@ -13,6 +13,7 @@
         dest: "{{ file_path }}"
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
+        checksum: "{{ checksum | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
       when: is_base64_content|bool != true
 
@@ -22,5 +23,6 @@
         dest: "{{ file_path }}"
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
+        checksum: "{{ checksum | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
       when: is_base64_content|bool == true
