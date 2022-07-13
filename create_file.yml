@@ -13,7 +13,7 @@
         dest: "{{ file_path }}"
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
-        mode: "{{ permissions | default(omit) }}"
+        mode: "{{ mode | default(omit) }}"
       when: is_base64_content|bool != true
 
     - name: create a file with base64 content
