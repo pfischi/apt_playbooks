@@ -6,6 +6,11 @@
     ansible_password: "{{ ssh_password | default(omit) }}"
     ansible_port: "{{ ssh_port | default(22,boolean=True) }}"
   tasks:
+    - name: "Check if dir path exists"
+      stat:
+        path: "{{ path }}"
+      register: result
+
     - name: modify file attributes
       file:
         path: "{{ path }}"
@@ -18,3 +23,4 @@
         modification_time: "{{ modification_time | default(omit) }}"
         modification_time_format: "{{ modification_time_format | default(omit) }}"
         recurse: "{{ recurse | default(omit) }}"
+      when: result.stat.exists
