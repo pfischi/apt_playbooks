@@ -17,3 +17,4 @@
         access_time_format: "{{ access_time_format | default(omit) }}"
         modification_time: "{{ modification_time | default(omit) }}"
         modification_time_format: "{{ modification_time_format | default(omit) }}"
+        recurse: "{{ recurse | default(omit) }}"
