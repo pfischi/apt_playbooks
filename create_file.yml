@@ -15,7 +15,6 @@
         group: "{{ group | default(omit) }}"
         checksum: "{{ checksum | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
-        force: "{{ force | default(omit) }}"
       when: is_base64_content|bool != true
 
     - name: create a file with base64 content
@@ -26,5 +25,4 @@
         group: "{{ group | default(omit) }}"
         checksum: "{{ checksum | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
-        force: "{{ force | default(omit) }}"
       when: is_base64_content|bool == true
