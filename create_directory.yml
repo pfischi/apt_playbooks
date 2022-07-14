@@ -6,16 +6,16 @@
     ansible_password: "{{ ssh_password | default(omit) }}"
     ansible_port: "{{ ssh_port | default(22,boolean=True) }}"
   tasks:
-    - name: check if directory exists
+    - name: check if basename of given directory exists
       stat:
-        path: "{{ path }}"
+        path: "{{ path | dirname }}"
       register: result
 
     - fail:
-        msg: "{{ path }} already exists."
-      when: result.stat.exists
+        msg: "Parent directory {{ path | dirname }} not exists."
+      when: not result.stat.exists
 
-    - name: create directory with attributes
+    - name: create a directory with attributes
       file:
         path: "{{ path }}"
         state: directory
@@ -26,4 +26,3 @@
         access_time_format: "{{ access_time_format | default(omit) }}"
         modification_time: "{{ modification_time | default(omit) }}"
         modification_time_format: "{{ modification_time_format | default(omit) }}"
-        recurse: "{{ recurse | default(omit) }}"
