@@ -1,4 +1,4 @@
-- name: Modify Directory
+- name: Create Directory
   hosts: '{{ host }}'
   vars:
     ansible_ssh_private_key_file: "{{ ssk_key | default(omit) }}"
@@ -15,7 +15,7 @@
         msg: "{{ path }} already exists."
       when: result.stat.exists
 
-    - name: modify directory attributes
+    - name: create directory with attributes
       file:
         path: "{{ path }}"
         state: directory
