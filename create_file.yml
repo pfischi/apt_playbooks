@@ -23,4 +23,8 @@
         owner: "{{ owner | default(omit) }}"
         group: "{{ group | default(omit) }}"
         mode: "{{ permissions | default(omit) }}"
+        access_time: "{{ access_time | default(omit) }}"
+        access_time_format: "{{ access_time_format | default(omit) }}"
+        modification_time: "{{ modification_time | default(omit) }}"
+        modification_time_format: "{{ modification_time_format | default(omit) }}"
       when: is_base64_content|bool == true
