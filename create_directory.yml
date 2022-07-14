@@ -12,8 +12,8 @@
       register: result
 
     - fail:
-        msg: "{{ path }} not exists."
-      when: not result.stat.exists
+        msg: "{{ path }} already exists."
+      when: result.stat.exists
 
     - name: modify directory attributes
       file:
